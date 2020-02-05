@@ -1,0 +1,34 @@
+---
+title: "individual1"
+output: html_document
+---
+
+# git init
+#git add individual1.rmd invididual.html
+#git commit 
+#git status
+#git remote add origin 
+
+# Read data into dataframe.
+
+# 1.) How are the ratings distributed? Draw a histogram of the ratings and describe it. Don’t forget to mention outliers, if there are any.
+
+# A majority of the ratings fall between the value of 2 and 4 as seen by the high frequencies of the histogram.
+# There seems to be an outlier that lies between 4.5 and 5. This is shown by the very small frequency. 
+
+
+```{r}
+choco <- read.csv("https://xdaiisu.github.io/ds202materials/hwlabs/choco.csv")
+head(choco);
+hist(choco$Rating, main = "Distribution of Ratings", xlab = "Ratings")
+```
+
+
+# 2.) Do ratings depend on the cacao percentage of a chocolate bar?
+
+# By looking at the graph we can see that a higher cocoa % equates to a rating that has a range from 1 to 4 and it is almost evenly distributed. We can see from the graph that the highest rating is typically found at the 60-70% amount of cocoa.
+```{r}
+plot(choco$Cocoa.Pct,choco$Rating,main = "Rating vs. Cocoa %", xlab= "Cocoa %", ylab = "Rating")
+
+```
+

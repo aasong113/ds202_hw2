@@ -1,0 +1,102 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This homework is about syntax and basic plotting functions in R, and is **due by the end of Feb 7**. 
+
+You can use the RMarkDown file with these homework instructions as a template for your work. 
+Make sure to replace "Your Name" and "your_github_username" in the YAML with your name and Github username.
+
+**Submission instructions**: Create a folder named `ds202_hw2`, and name the RMarkDown file including your solutions `hw2.Rmd` under this folder. For submission, create a GitHub repository named `ds202_hw2` under your account, and push both `hw2.Rmd` and the knitted `hw2.html` to GitHub before the deadline. I will assume you use the same GitHub username as for your HW1 submission. The latest version of your homework appearing on GitHub before the deadline is graded. *It is crucial to follow the exact folder structure and file names*, so that your homework can be reproduced and graded by an automated script. Some questions will require the following answer format.
+
+
+
+## R commands
+1. Today's temperature has a high of 24 and a low of 15 degree fahrenheit.  Find the corresponding degress in celsius and storage it in a (single) vector named `cel`. Print the variable.
+```{r}
+farenheit <-c(24,5);
+cel = (farenheit - 32) * (5/9);
+print(cel)
+```
+2. Create a vector of length 200. The odd entries should be 3 and even entries should be 1. Storage the created in a variable named `vec200` and print.
+```{r}
+vec200 <-c(1:200)
+for(i in 1:200){
+  if (i%%2!=0){
+    vec200[i]=3;
+  }
+  else{vec200[i]=1;
+  }
+  }
+print(vec200)
+
+```
+
+
+3. How many perfect squares are there between 1 and 2001? Storage the answer in a  variable named `numPerfect` and print. You may want to look at `?round`.
+
+```{r}
+numPerfect <- 0;
+for(i in 1:2001){
+  for(j in 1:i){
+    if(j*j == i){
+      numPerfect <- numPerfect+1;
+    }
+  }
+}
+print(numPerfect)
+```
+## Cars and mileage
+For this part we will use the `mpg` data set, you can access the data by first installing (using `install.packages('ggplot2')`) and then loading the package `ggplot2` (using `library(ggplot2)`) into your R session. The `mpg` data includes information about fuel economy of popular car models
+for the years 1999 and 2008 as collected by the US Environmental Protection Agency. An answer should include a short paragraph of text for the explanation to a (human) reader, together with appropriate R code, outputs, and graphs.
+```{r}
+ggplot2 = library(ggplot2);
+ggplot2
+mpg
+```
+1. What are the 3 most fuel-efficient models in terms of highway mileage? Storage the data frame (with 3 rows) containing all information of these three cars in a variable named `top3` and print.
+```{r}
+mpg_new <- mpg[order(mpg$hwy, decreasing = TRUE),]  
+top_3 <- head(mpg_new,3)
+print(top_3)
+```
+2. How many different compact models are included in this dataset? Storage the answer in  a variable named `numCompact` and print.
+```{r}
+compact <- mpg[,11];
+numCompact <- sum(compact == compact);
+print(numCompact)
+```
+3. Create a scatterplot of `hwy` and `cty` and describe the relationship. Why are there so few points visible? Explain your findings.
+```{r}
+plot(mpg$hwy,mpg$cty,main = "Highway Mileage vs. City Mileage", xlab= "Highway Mileage", ylab = "City Mileage")
+```
+# There are so few points visible, because many values may are clustered in the same area. From the graph we can see that there is a linear upward trend. The trend shows that as the high mileage increases, so does the city mileage. 
+
+4. Are cars in 2008 more fuel efficient than cars in 1999? Use graphs *and* summary statistics to answer this question. Explain your findings.
+```{r}
+year_1999 <- subset(mpg, year == 1999)
+year_2008 <- subset(mpg, year == 2008)
+print(year_1999)
+print(year_2008)
+plot(year_1999$hwy,year_1999$cty,main = "Highway Mileage vs. City Mileage in 1999", xlab= "Highway Mileage", ylab = "City Mileage")
+plot(year_2008$hwy,year_2008$cty,main = "Highway Mileage vs. City Mileage in 2008", xlab= "Highway Mileage", ylab = "City Mileage")
+boxplot(year_1999$hwy, main = "Highway Mileage in 1999",ylab = "Mileage")
+boxplot(year_2008$hwy, main = "Highway Mileage in 2008",ylab = "Mileage")
+boxplot(year_1999$cty, main = "City Mileage in 1999",ylab = "Mileage")
+boxplot(year_2008$cty, main = "City Mileage in 2008",ylab = "Mileage")
+
+hwy_1999 <- summary(year_1999$hwy)
+hwy_2008 <- summary(year_2008$hwy)
+print(hwy_1999)
+print(hwy_2008)
+
+cty_1999 <- summary(year_1999$cty)
+cty_2008 <- summary(year_2008$cty)
+print(cty_1999)
+print(cty_2008)
+
+```
+# From the data we can see that when looking at ALL the cars from a Assuming that a fuel efficieny car, is a car that has a city mileage above 20 and a highway mileage above 30 (this is completely arbitary). From a statistical point of view, we see that there is not a significant difference in their highway and city fuel efficiency from the different years. This is evident by the median and mean mileages of all the cars in their respective years, this is with the exception of distribution. But when looking at the box plots and scatter plots we can see that the distribution is different. 
+# Although the 1999 cars have a couple outliers that have high mileage efficiency, this quantity is smaller than the amount of high mileage efficiency cars in 2008. We can say that are larger proportion of the cars in 2008 meet our criteria of "fuel efficient." This is most likely due to the advancements in technology that allow us to produce more fuel efficient cars at a lower price. 
+
+Note: your submission is supposed to be fully reproducible, i.e. the TA and I will 'knit' your submission. Make sure that you don't use any file structure that depends on your computing environment.

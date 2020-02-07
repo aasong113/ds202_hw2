@@ -180,6 +180,7 @@ summary {
 </div>
 
 
+<p>Name: Anthony Song Student ID: 541986510 Github Username: aasong113</p>
 <p>This homework is about syntax and basic plotting functions in R, and is <strong>due by the end of Feb 7</strong>.</p>
 <p>You can use the RMarkDown file with these homework instructions as a template for your work. Make sure to replace “Your Name” and “your_github_username” in the YAML with your name and Github username.</p>
 <p><strong>Submission instructions</strong>: Create a folder named <code>ds202_hw2</code>, and name the RMarkDown file including your solutions <code>hw2.Rmd</code> under this folder. For submission, create a GitHub repository named <code>ds202_hw2</code> under your account, and push both <code>hw2.Rmd</code> and the knitted <code>hw2.html</code> to GitHub before the deadline. I will assume you use the same GitHub username as for your HW1 submission. The latest version of your homework appearing on GitHub before the deadline is graded. <em>It is crucial to follow the exact folder structure and file names</em>, so that your homework can be reproduced and graded by an automated script. Some questions will require the following answer format.</p>
@@ -261,10 +262,10 @@ print(top_3)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>How many different compact models are included in this dataset? Storage the answer in a variable named <code>numCompact</code> and print.</li>
 </ol>
-<pre class="r"><code>compact &lt;- mpg[,11];
-numCompact &lt;- sum(compact == compact);
+<pre class="r"><code>mods &lt;- subset(mpg, mpg$class == 'compact')
+numCompact = nrow(mods)
 print(numCompact)</code></pre>
-<pre><code>## [1] 234</code></pre>
+<pre><code>## [1] 47</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Create a scatterplot of <code>hwy</code> and <code>cty</code> and describe the relationship. Why are there so few points visible? Explain your findings.</li>
 </ol>

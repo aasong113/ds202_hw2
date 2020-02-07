@@ -1,6 +1,9 @@
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+Name: Anthony Song
+Student ID: 541986510
+Github Username: aasong113
 
 This homework is about syntax and basic plotting functions in R, and is **due by the end of Feb 7**. 
 
@@ -62,8 +65,8 @@ print(top_3)
 ```
 2. How many different compact models are included in this dataset? Storage the answer in  a variable named `numCompact` and print.
 ```{r}
-compact <- mpg[,11];
-numCompact <- sum(compact == compact);
+mods <- subset(mpg, mpg$class == 'compact')
+numCompact = nrow(mods)
 print(numCompact)
 ```
 3. Create a scatterplot of `hwy` and `cty` and describe the relationship. Why are there so few points visible? Explain your findings.
